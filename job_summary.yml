@@ -19,7 +19,7 @@
       postgresql_query:
         db: awx 
         query: "{{ job_query }}"
-        login_host: "{{ inventory_hostname }}"
+        login_host: 'ip-10-0-3-70.us-east-2.compute.internal'
       register: metrics
 
     - name: print metrics object
