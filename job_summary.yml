@@ -1,0 +1,21 @@
+---
+- name: Summarize failed hosts/tasks from job
+  hosts: localhost
+  vars:
+    job_id: "{{ survey_job_id }}"
+    job_query: > 
+      SELECT play as "Job Template", job_id, host_name, failed, task, stdout, role from main_jobevent
+      WHERE job_id = {{ job_id }} and failed = true and play <> '';
+  collections:
+    community.postgresql 
+  tasks:
+    - name: Query Controller db for events related to {{ job_id }}
+      postgresql_query:
+        db: aws 
+        query: "{{ job_query }}"
+      register: metrics
+
+    - name: print metrics object
+      debug:
+        var: metrics
+      
