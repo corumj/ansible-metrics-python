@@ -9,6 +9,12 @@
   collections:
     community.postgresql 
   tasks:
+    - name: Ensure psycopg2 is present
+      pip:
+        name: psycopg2 
+        state: present 
+      become: yes 
+      
     - name: Query Controller db for events related to {{ job_id }}
       postgresql_query:
         db: awx 
