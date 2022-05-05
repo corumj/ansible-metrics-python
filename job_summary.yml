@@ -19,6 +19,7 @@
       postgresql_query:
         db: awx 
         query: "{{ job_query }}"
+        login_host: "{{ ansible_host }}"
       register: metrics
 
     - name: print metrics object
