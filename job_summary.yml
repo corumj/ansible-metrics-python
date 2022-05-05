@@ -11,7 +11,7 @@
   tasks:
     - name: Query Controller db for events related to {{ job_id }}
       postgresql_query:
-        db: aws 
+        db: awx 
         query: "{{ job_query }}"
       register: metrics
 
